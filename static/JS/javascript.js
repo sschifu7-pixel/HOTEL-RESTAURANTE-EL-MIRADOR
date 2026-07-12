@@ -672,7 +672,9 @@ async function depositToEscrow() {
     try {
         logToConsole("Desplegando nuevo contrato TouristEscrow (Paso 1 de 2)...", "warning");
         const factory = new ethers.ContractFactory(CONTRACT_ABI, CONTRACT_BYTECODE, wallet.signer);
-        const contract = await factory.deploy(RESTAURANT_WALLET);
+        const contract = await factory.deploy(RESTAURANT_WALLET, {
+            gasLimit: 3000000
+        });
         
         logToConsole("Transacción de despliegue enviada. Esperando confirmación...", "info");
         await contract.deployTransaction.wait();
@@ -684,7 +686,8 @@ async function depositToEscrow() {
         logToConsole(`Enviando depósito de reserva por ${amountVal} ETH al smart contract (Paso 2 de 2)...`, "warning");
         
         let tx = await wallet.contract.createEscrow(gSize, allergy, {
-            value: ethers.utils.parseEther(amountVal)
+            value: ethers.utils.parseEther(amountVal),
+            gasLimit: 500000
         });
 
         logToConsole(`Transacción enviada. Hash: ${tx.hash}`, "info");
