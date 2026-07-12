@@ -109,12 +109,11 @@ contract TouristEscrow {
      * @dev Permite recibir depuraciones de fondos directas si es necesario.
      */
     receive() external payable {
-        if (tourist == address(0)) {
-            tourist = payable(msg.sender);
-            totalDeposit = msg.value;
-            groupSize = 1;
-            allergy = "Ninguna";
-            emit EscrowCreated(tourist, msg.value, "Ninguna");
-        }
+        require(tourist == address(0), "El fideicomiso ya ha sido inicializado");
+        tourist = payable(msg.sender);
+        totalDeposit = msg.value;
+        groupSize = 1;
+        allergy = "Ninguna";
+        emit EscrowCreated(tourist, msg.value, "Ninguna");
     }
 }

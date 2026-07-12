@@ -357,7 +357,7 @@
             // Inicializar billetera
             await initAdminWallet();
 
-            const res = await fetch('/api/tourists/list/');
+            const res = await fetch('/api/tourists/list/', { headers: { 'X-Admin-Token': 'hackathon-demo-2026' } });
             const data = await res.json();
 
             if (!data.success) {
@@ -417,6 +417,27 @@
                         const contract = new ethers.Contract(t.contract_address, ADMIN_CONTRACT_ABI, adminWallet.provider);
                         const depVal = await contract.totalDeposit();
                         const depEth = parseFloat(ethers.utils.formatEther(depVal));
+                        
+                        // Auto-healing logic
+                        let realStage = 0;
+                        for (let i = 1; i <= 6; i++) {
+                            if (await contract.milestoneReleased(i)) {
+                                realStage = i;
+                            }
+                        }
+                        if (realStage > t.current_stage && t.status === 'active') {
+                            console.log(`Auto-healing: Actualizando ${t.contract_address} de hito ${t.current_stage} a ${realStage}`);
+                            await fetch('/api/tourists/update/', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-Admin-Token': 'hackathon-demo-2026'
+                                },
+                                body: JSON.stringify({ contract_address: t.contract_address, stage_id: realStage })
+                            });
+                            t.current_stage = realStage; // Update local variable for UI
+                            if (realStage === 6) t.status = 'completed';
+                        }
 
                         let relEth = 0;
                         if (t.status === 'completed') {
@@ -516,7 +537,8 @@
             const res = await fetch('/api/tourists/update/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-Admin-Token': 'hackathon-demo-2026'
                 },
                 body: JSON.stringify({
                     contract_address: contractAddress,

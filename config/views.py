@@ -45,6 +45,8 @@ def create_tourist_api(request):
 @csrf_exempt
 def update_tourist_progress_api(request):
     if request.method == 'POST':
+        if request.headers.get('X-Admin-Token') != 'hackathon-demo-2026':
+            return JsonResponse({'success': False, 'error': 'No autorizado'}, status=403)
         try:
             data = json.loads(request.body)
             contract_address = data.get('contract_address')
@@ -79,6 +81,8 @@ def update_tourist_progress_api(request):
     return JsonResponse({'success': False, 'error': 'Método no permitido'}, status=405)
 
 def list_tourists_api(request):
+    if request.headers.get('X-Admin-Token') != 'hackathon-demo-2026':
+        return JsonResponse({'success': False, 'error': 'No autorizado'}, status=403)
     tourists = TouristProgress.objects.all().order_by('-updated_at')
     data = []
     for t in tourists:
