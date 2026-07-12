@@ -22,10 +22,9 @@
     </div>
 
     <div class="gallery-grid">
-        <!-- Main Media Showcase -->
-        <div class="gallery-main" id="main-showcase">
+        <!-- Main Media Showcas        <div class="gallery-main" id="main-showcase">
             <video id="gallery-video" autoplay loop muted playsinline>
-                <source src="{% static 'IMG/WhatsApp Video 2026-07-11 at 12.36.10 PM.mp4' %}" type="video/mp4">
+                <source src="{% static 'IMG/Video_paseo.mp4' %}" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
             <img id="gallery-img-showcase" style="display: none; width: 100%; height: 100%; object-fit: cover;" src=""
@@ -50,55 +49,58 @@
                         style="font-size: 24px; color: var(--primary); filter: drop-shadow(0 0 8px var(--primary-glow));"></i>
                 </div>
                 <video style="width: 100%; height: 100%; object-fit: cover;" muted>
-                    <source src="{% static 'IMG/WhatsApp Video 2026-07-11 at 12.36.10 PM.mp4' %}" type="video/mp4">
+                    <source src="{% static 'IMG/Video_paseo.mp4' %}" type="video/mp4">
                 </video>
                 <span class="thumb-desc">Video de la Experiencia</span>
-            </div>|
-            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.38.47 AM (1).jpeg' %}"
+            </div>
+            
+            <div class="sidebar-thumb" data-src="{% static 'IMG/foto_Comida.jpeg' %}"
                 data-title="Cocina Tradicional a la Leña"
                 data-desc="Preparación de guisados típicos en fogón por cocineras locales."
                 onclick="swapShowcaseFromElement(this)">
-                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.38.47 AM (1).jpeg' %}" alt="Cocina">
+                <img src="{% static 'IMG/foto_Comida.jpeg' %}" alt="Cocina">
                 <span class="thumb-desc">Cocina a la Leña</span>
             </div>
 
-            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.21.28 AM.jpeg' %}"
+            <div class="sidebar-thumb" data-src="{% static 'IMG/foto_fogata.jpeg' %}"
                 data-title="Comedor al Aire Libre" data-desc="Espacio rústico y campestre rodeado de naturaleza."
                 onclick="swapShowcaseFromElement(this)">
-                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.21.28 AM.jpeg' %}" alt="Comedor">
+                <img src="{% static 'IMG/foto_fogata.jpeg' %}" alt="Comedor">
                 <span class="thumb-desc">Comedor Campestre</span>
             </div>
 
-            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.28.24 AM.jpeg' %}"
-                data-title="Platillos Tradicionales"
-                data-desc="Servicio de quesadillas, empanadas y tortillas hechas a mano."
+            <div class="sidebar-thumb" data-src="{% static 'IMG/video_lancha.mp4' %}"
+                data-title="Paseo en Lancha"
+                data-desc="Disfruta de un recorrido tranquilo por la laguna en nuestras lanchas."
                 onclick="swapShowcaseFromElement(this)">
-                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.28.24 AM.jpeg' %}" alt="Comida">
-                <span class="thumb-desc">Antojitos Hechos a Mano</span>
+                <video style="width: 100%; height: 100%; object-fit: cover;" muted>
+                    <source src="{% static 'IMG/video_lancha.mp4' %}" type="video/mp4">
+                </video>
+                <span class="thumb-desc">Paseo en Lancha</span>
             </div>
 
-            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.38.47 AM.jpeg' %}"
+            <div class="sidebar-thumb" data-src="{% static 'IMG/foto_lancha.jpeg' %}"
                 data-title="Laguna San Bernardino"
                 data-desc="Hermosa vista de la laguna, ideal para actividades en contacto con la naturaleza."
                 onclick="swapShowcaseFromElement(this)">
-                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.38.47 AM.jpeg' %}" alt="Laguna">
+                <img src="{% static 'IMG/foto_lancha.jpeg' %}" alt="Laguna">
                 <span class="thumb-desc">Vista a la Laguna</span>
             </div>
 
-            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.41.59 AM.jpeg' %}"
+            <div class="sidebar-thumb" data-src="{% static 'IMG/foto_familar.jpeg' %}"
                 data-title="Experiencia en Comunidad"
                 data-desc="Disfruta de momentos inolvidables en familia, con calidez y hospitalidad."
                 onclick="swapShowcaseFromElement(this)">
-                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.41.59 AM.jpeg' %}" alt="Mesa">
+                <img src="{% static 'IMG/foto_familar.jpeg' %}" alt="Mesa">
                 <span class="thumb-desc">Comida Familiar</span>
             </div>
 
-            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.43.09 AM.jpeg' %}"
-                data-title="Ruta Motociclista"
-                data-desc="El Mirador es una parada obligatoria y punto de encuentro para las rodadas."
+            <div class="sidebar-thumb" data-src="{% static 'IMG/foto_recamara.jpeg' %}"
+                data-title="Hospedaje Rústico"
+                data-desc="Descansa en nuestras cómodas habitaciones campestres."
                 onclick="swapShowcaseFromElement(this)">
-                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.43.09 AM.jpeg' %}" alt="Sazones">
-                <span class="thumb-desc">Ruta en Moto</span>
+                <img src="{% static 'IMG/foto_recamara.jpeg' %}" alt="Hospedaje">
+                <span class="thumb-desc">Hospedaje</span>
             </div>
         </div>
     </div>
