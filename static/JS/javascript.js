@@ -438,8 +438,8 @@ async function connectWallet() {
         wallet.signer = wallet.provider.getSigner();
         wallet.address = accounts[0];
 
-        // Cambiar a Linea Mainnet
-        const TARGET_CHAIN_ID = '0xe708'; // Linea Mainnet (59144)
+        // Cambiar a Soneium Minato
+        const TARGET_CHAIN_ID = '0x79a'; // Soneium Minato (1946)
         const chainId = await window.ethereum.request({ method: 'eth_chainId' });
         
         if (chainId !== TARGET_CHAIN_ID) {
@@ -449,7 +449,7 @@ async function connectWallet() {
                     method: 'wallet_switchEthereumChain',
                     params: [{ chainId: TARGET_CHAIN_ID }],
                 });
-                logToConsole("Red cambiada a Linea Mainnet.", "info");
+                logToConsole("Red cambiada a Soneium Minato.", "info");
             } catch (switchErr) {
                 // Código 4902 = la red no existe en MetaMask, agregarla
                 if (switchErr.code === 4902) {
@@ -458,13 +458,13 @@ async function connectWallet() {
                             method: 'wallet_addEthereumChain',
                             params: [{
                                 chainId: TARGET_CHAIN_ID,
-                                chainName: 'Linea Mainnet',
+                                chainName: 'Soneium Minato',
                                 nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-                                rpcUrls: ['https://rpc.linea.build'],
-                                blockExplorerUrls: ['https://lineascan.build']
+                                rpcUrls: ['https://rpc.minato.soneium.org'],
+                                blockExplorerUrls: ['https://explorer-testnet.soneium.org']
                             }]
                         });
-                        logToConsole("Linea Mainnet agregada y activada en MetaMask.", "success");
+                        logToConsole("Soneium Minato agregada y activada en MetaMask.", "success");
                     } catch (addErr) {
                         logToConsole(`No se pudo agregar Linea Sepolia: ${addErr.message}`, "warning");
                     }
@@ -473,7 +473,7 @@ async function connectWallet() {
                 }
             }
         } else {
-            logToConsole("Red correcta: Linea Mainnet.", "success");
+            logToConsole("Red correcta: Soneium Minato.", "success");
         }
 
         // Update UI
