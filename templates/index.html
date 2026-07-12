@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- HERO / GALERÍA DE LA EXPERIENCIA REAL -->
+<section class="experience-hero">
+    <div style="margin-bottom: 30px; text-align: left;">
+        <span class="hero-tag-mini"
+            style="background: rgba(0, 242, 254, 0.1); border: 1px solid rgba(0, 242, 254, 0.3); color: var(--primary);"><i
+                class="fa-solid fa-trophy"></i> Incubathon ETH Cinco de Mayo 2026</span>
+        <h1
+            style="font-size: clamp(2.5rem, 5vw, 4rem); font-family: var(--font-heading); font-weight: 800; margin-top: 15px; margin-bottom: 12px; line-height: 1.1; text-shadow: 0 0 30px rgba(0, 242, 254, 0.15);">
+            Ruta Gastronómica & Escrow Web3:<br><span class="text-gradient-cyan" style="font-size: 1.1em;">El
+                Mirador</span>
+        </h1>
+        <p class="hero-desc" style="font-size: 1.1rem; color: #94a3b8; max-width: 800px; line-height: 1.6;">
+            Una experiencia turística real y comunitaria en <strong style="color: #fff;">San Bernardino
+                Lagunas</strong>, Puebla.
+            Mapeada en tiempo real y descentralizada a través de depósitos de garantía (Escrow)
+            y checkpoints NFC para el restaurante campestre.
+        </p>
+    </div>
+
+    <div class="gallery-grid">
+        <!-- Main Media Showcase -->
+        <div class="gallery-main" id="main-showcase">
+            <video id="gallery-video" autoplay loop muted playsinline>
+                <source src="{% static 'IMG/WhatsApp Video 2026-07-11 at 12.36.10 PM.mp4' %}" type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+            <img id="gallery-img-showcase" style="display: none; width: 100%; height: 100%; object-fit: cover;" src=""
+                alt="Showcase">
+            <div class="overlay">
+                <h2 id="showcase-title">Naturaleza y Gastronomía</h2>
+                <p id="showcase-desc">Descubre el paisaje de San Bernardino Lagunas y nuestra comida tradicional en El
+                    Mirador.</p>
+            </div>
+            <button id="btn-back-video" class="btn btn-secondary"
+                style="position: absolute; top: 15px; right: 15px; padding: 6px 12px; font-size: 11px; display: none;">
+                <i class="fa-solid fa-play"></i> Ver Video Real
+            </button>
+        </div>
+
+        <!-- Sidebar Thumbnails -->
+        <div class="gallery-sidebar">
+            <div class="sidebar-thumb" onclick="playVideoShowcase()">
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; z-index: 1;">
+                    <i class="fa-solid fa-circle-play"
+                        style="font-size: 24px; color: var(--primary); filter: drop-shadow(0 0 8px var(--primary-glow));"></i>
+                </div>
+                <video style="width: 100%; height: 100%; object-fit: cover;" muted>
+                    <source src="{% static 'IMG/WhatsApp Video 2026-07-11 at 12.36.10 PM.mp4' %}" type="video/mp4">
+                </video>
+                <span class="thumb-desc">Video de la Experiencia</span>
+            </div>|
+            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.38.47 AM (1).jpeg' %}"
+                data-title="Cocina Tradicional a la Leña"
+                data-desc="Preparación de guisados típicos en fogón por cocineras locales."
+                onclick="swapShowcaseFromElement(this)">
+                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.38.47 AM (1).jpeg' %}" alt="Cocina">
+                <span class="thumb-desc">Cocina a la Leña</span>
+            </div>
+
+            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.21.28 AM.jpeg' %}"
+                data-title="Comedor al Aire Libre" data-desc="Espacio rústico y campestre rodeado de naturaleza."
+                onclick="swapShowcaseFromElement(this)">
+                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.21.28 AM.jpeg' %}" alt="Comedor">
+                <span class="thumb-desc">Comedor Campestre</span>
+            </div>
+
+            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.28.24 AM.jpeg' %}"
+                data-title="Platillos Tradicionales"
+                data-desc="Servicio de quesadillas, empanadas y tortillas hechas a mano."
+                onclick="swapShowcaseFromElement(this)">
+                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.28.24 AM.jpeg' %}" alt="Comida">
+                <span class="thumb-desc">Antojitos Hechos a Mano</span>
+            </div>
+
+            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.38.47 AM.jpeg' %}"
+                data-title="Laguna San Bernardino"
+                data-desc="Hermosa vista de la laguna, ideal para actividades en contacto con la naturaleza."
+                onclick="swapShowcaseFromElement(this)">
+                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.38.47 AM.jpeg' %}" alt="Laguna">
+                <span class="thumb-desc">Vista a la Laguna</span>
+            </div>
+
+            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.41.59 AM.jpeg' %}"
+                data-title="Experiencia en Comunidad"
+                data-desc="Disfruta de momentos inolvidables en familia, con calidez y hospitalidad."
+                onclick="swapShowcaseFromElement(this)">
+                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.41.59 AM.jpeg' %}" alt="Mesa">
+                <span class="thumb-desc">Comida Familiar</span>
+            </div>
+
+            <div class="sidebar-thumb" data-src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.43.09 AM.jpeg' %}"
+                data-title="Ruta Motociclista"
+                data-desc="El Mirador es una parada obligatoria y punto de encuentro para las rodadas."
+                onclick="swapShowcaseFromElement(this)">
+                <img src="{% static 'IMG/WhatsApp Image 2026-07-11 at 11.43.09 AM.jpeg' %}" alt="Sazones">
+                <span class="thumb-desc">Ruta en Moto</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alliance Banner (Alianzas Institucionales) -->
+    <div class="alliance-banner"
+        style="display: flex; justify-content: center; gap: 40px; padding: 25px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; border-radius: 0 0 24px 24px; background: rgba(0,0,0,0.2);">
+        <div class="alliance-item"
+            style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: #cbd5e1;">
+            <i class="fa-solid fa-award" style="font-size: 24px; color: var(--primary);"></i>
+            <span>Proyecto Demo para <strong style="color: #fff;">Incubathon CDMX 2026</strong></span>
+        </div>
+        <div class="alliance-item"
+            style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: #cbd5e1;">
+            <i class="fa-solid fa-map" style="font-size: 24px; color: #a78bfa;"></i>
+            <span>Apoyo Institucional <strong style="color: #fff;">FONATUR</strong></span>
+        </div>
+        <div class="alliance-item"
+            style="display: flex; align-items: center; gap: 12px; font-size: 16px; color: #cbd5e1;">
+            <i class="fa-solid fa-briefcase" style="font-size: 24px; color: var(--success);"></i>
+            <span>Impulsado por <strong style="color: #fff;">Cámara de Comercio de CDMX</strong></span>
+        </div>
+    </div>
+</section>
+
+<!-- TARJETAS INTERACTIVAS (Turismo Tarjetas) -->
+<section id="tarjetas-interactivas" class="flashcards-section"
+    style="margin-bottom: 50px; padding: 60px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(30, 41, 59, 0.4) 0%, transparent 70%); border-radius: 24px; border: 1px solid rgba(255,255,255,0.05);">
+
+    <div style="text-align: center; margin-bottom: 40px; width: 100%; position: relative; z-index: 2;">
+        <h2
+            style="justify-content: center; font-size: 36px; font-weight: 800; font-family: var(--font-heading); margin-bottom: 10px; color: #f8fafc;">
+            <i class="fa-solid fa-layer-group" style="color: var(--primary);"></i> Turismo Tarjetas</h2>
+        <p class="subtitle" style="margin-bottom: 5px; color: #94a3b8; font-size: 16px;">Presiona "Espacio" para voltear
+            la tarjeta, ← / → para navegar</p>
+    </div>
+
+    <!-- Contenedor Principal de la Tarjeta -->
+    <div class="flashcard-container" id="fc-container" tabindex="0">
+        <!-- Las tarjetas se generan dinámicamente con JS -->
+    </div>
+
+    <!-- Controles de navegación y acción debajo de la tarjeta -->
+    <div class="flashcard-controls">
+        <button id="fc-prev" class="fc-btn-nav"><i class="fa-solid fa-arrow-left"></i></button>
+
+        <button id="fc-wrong" class="fc-btn-action wrong">
+            <i class="fa-solid fa-xmark"></i> <span class="fc-count" id="fc-count-wrong">0</span>
+        </button>
+
+        <button id="fc-right" class="fc-btn-action right">
+            <span class="fc-count" id="fc-count-right">0</span> <i class="fa-solid fa-check"></i>
+        </button>
+
+        <button id="fc-next" class="fc-btn-nav"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <!-- Botones de feedback en la parte inferior izquierda -->
+    <div class="flashcard-feedback-btns">
+        <button class="fc-btn-outline"><i class="fa-regular fa-thumbs-up"></i> Contenido adecuado</button>
+        <button class="fc-btn-outline"><i class="fa-regular fa-thumbs-down"></i> Contenido inadecuado</button>
+    </div>
+
+</section>
+
+</section>
+
+{% endblock %}

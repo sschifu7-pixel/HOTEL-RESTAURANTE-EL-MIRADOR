@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencia El Mirador - Web3 Escrow & NFC Terminal</title>
+
+    <!-- Google Fonts: Outfit (headings) & Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Ethers.js for MetaMask wallet connection -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" type="text/javascript"></script>
+
+    <!-- Leaflet.js for interactive mapping of San Bernardino Lagunas -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <link rel="stylesheet" href="{% static 'CSS/style.css' %}?v=3">
+    <style>
+        /* INLINE MOBILE MENU STYLES TO BYPASS CACHE */
+        @media (max-width: 768px) {
+            .unified-nav-links {
+                display: none !important;
+                position: absolute !important;
+                top: 100% !important;
+                left: 0 !important;
+                width: 100% !important;
+                background: rgba(15, 23, 42, 0.98) !important;
+                backdrop-filter: blur(12px) !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                padding: 20px 0 !important;
+                gap: 20px !important;
+                border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+                z-index: 9999 !important;
+            }
+            .unified-nav-links.force-active {
+                display: flex !important;
+            }
+            .brand-logo-text {
+                display: none !important;
+            }
+            .mobile-menu-btn {
+                display: block !important;
+                background: transparent;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #fff;
+                font-size: 20px;
+                padding: 6px 12px;
+                border-radius: 8px;
+                cursor: pointer;
+                margin-right: 15px;
+            }
+            .sec-menu-divider {
+                display: none !important;
+            }
+        }
+        .mobile-menu-btn {
+            display: none;
+        }
+    </style>
+
+    <script>
+        // INLINE SCRIPT TO BYPASS CACHE
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn = document.getElementById('mobile-menu-btn');
+            var links = document.querySelector('.unified-nav-links');
+            if(btn && links) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    links.classList.toggle('force-active');
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="glow-bg"></div>
+
+    <!-- NAVBAR UNIFICADO: Logo izquierda + Menú derecha -->
+    <header class="unified-navbar">
+        <div class="unified-nav-inner">
+
+            <!-- LOGO: imagen + nombre restaurante -->
+            <a href="/" class="unified-brand">
+                <img src="{% static 'IMG/icon2.png' %}" alt="El Mirador Logo" class="brand-logo-img">
+                <div class="brand-logo-text">
+                    <span class="brand-logo-name">EL MIRADOR</span>
+                    <span class="brand-logo-sub">RESTAURANTE</span>
+                </div>
+            </a>
+
+            <!-- SEPARADOR CENTRAL -->
+            <div class="unified-nav-sep"></div>
+
+            <!-- OPCIONES DE NAVEGACIÓN -->
+            <nav class="unified-nav-links">
+                <a href="/" class="sec-menu-item">EXPERIENCIA</a>
+                <div class="sec-menu-divider"></div>
+                <a href="{% url 'usuario' %}" class="sec-menu-item" style="color: #00f2fe;">TURISTA (RESERVAR)</a>
+                <div class="sec-menu-divider"></div>
+                <a href="{% url 'admin_panel' %}" class="sec-menu-item" style="color: #c084fc;">ADMINISTRADOR</a>
+                <div class="sec-menu-divider"></div>
+            </nav>
+
+            <!-- HAMBURGER MENU BOTON (solo móvil) -->
+            <button id="mobile-menu-btn" class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- WALLET (derecha extrema) -->
+            <div class="unified-nav-wallet">
+                <div class="wallet-badge" id="wallet-badge" style="display: none;">
+                    <span class="dot active"></span>
+                    <span id="display-wallet-nav" class="font-mono">0x...</span>
+                </div>
+                <button id="btn-connect" class="btn-wallet">
+                    <i class="fa-solid fa-wallet"></i> Conectar
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{% static 'JS/javascript.js' %}?v=4"></script>
+</body>
+
+</html>s
