@@ -432,6 +432,20 @@ async function connectWallet() {
         wallet.signer = wallet.provider.getSigner();
         wallet.address = accounts[0];
 
+        // Force Sepolia network
+        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+        if (chainId !== '0xaa36a7') {
+            try {
+                await window.ethereum.request({
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: '0xaa36a7' }],
+                });
+                logToConsole("Red cambiada automáticamente a Sepolia.", "info");
+            } catch (err) {
+                logToConsole("Por favor, cambia manualmente a la red Sepolia en tu MetaMask.", "warning");
+            }
+        }
+
         // Update UI
         const shortenedWallet = `${wallet.address.substring(0, 6)}...${wallet.address.substring(38)}`;
         document.getElementById('nav-wallet-status').innerText = `Billetera: ${shortenedWallet}`;

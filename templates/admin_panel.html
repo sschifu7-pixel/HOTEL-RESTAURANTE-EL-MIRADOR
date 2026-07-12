@@ -322,6 +322,21 @@
             if (accounts.length > 0) {
                 adminWallet.signer = adminWallet.provider.getSigner();
                 adminWallet.address = accounts[0];
+                
+                // Force Sepolia network
+                const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+                if (chainId !== '0xaa36a7') {
+                    try {
+                        await window.ethereum.request({
+                            method: 'wallet_switchEthereumChain',
+                            params: [{ chainId: '0xaa36a7' }],
+                        });
+                        if (typeof logAdminConsole === 'function') logAdminConsole("Red cambiada automáticamente a Sepolia.", "info");
+                    } catch (err) {
+                        if (typeof logAdminConsole === 'function') logAdminConsole("Por favor, cambia manualmente a la red Sepolia en tu MetaMask.", "warning");
+                    }
+                }
+
                 const shortened = `${adminWallet.address.substring(0, 6)}...${adminWallet.address.substring(38)}`;
                 const wBadge = document.getElementById('admin-wallet-status');
                 if (wBadge) {
