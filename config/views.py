@@ -16,6 +16,9 @@ def usuario_view(request):
 @csrf_exempt
 def create_tourist_api(request):
     if request.method == 'POST':
+        # CORRECCIÓN: Validar token de autenticación (igual que el endpoint de actualización)
+        if request.headers.get('X-Admin-Token') != 'hackathon-demo-2026':
+            return JsonResponse({'success': False, 'error': 'No autorizado'}, status=403)
         try:
             data = json.loads(request.body)
             name = data.get('name', 'Turista Anónimo')
@@ -68,6 +71,9 @@ def update_tourist_progress_api(request):
             
             if status is not None:
                 progress.status = status
+                # CORRECCIÓN: Si se marca como reembolsado, registrar etapa especial
+                if status == 'refunded':
+                    progress.current_stage = -1
                 
             progress.save()
             return JsonResponse({
