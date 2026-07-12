@@ -428,7 +428,7 @@ async function connectWallet() {
         logToConsole("Solicitando conexión a MetaMask...");
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         
-        wallet.provider = new ethers.providers.Web3Provider(window.ethereum);
+        wallet.provider = new ethers.providers.Web3Provider(window.ethereum, "any");
         wallet.signer = wallet.provider.getSigner();
         wallet.address = accounts[0];
 

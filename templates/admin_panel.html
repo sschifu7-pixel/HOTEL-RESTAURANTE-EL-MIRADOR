@@ -317,7 +317,7 @@
     async function initAdminWallet() {
         if (typeof window.ethereum === 'undefined') return;
         try {
-            adminWallet.provider = new ethers.providers.Web3Provider(window.ethereum);
+            adminWallet.provider = new ethers.providers.Web3Provider(window.ethereum, "any");
             const accounts = await adminWallet.provider.listAccounts();
             if (accounts.length > 0) {
                 adminWallet.signer = adminWallet.provider.getSigner();
