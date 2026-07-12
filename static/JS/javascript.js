@@ -432,17 +432,17 @@ async function connectWallet() {
         wallet.signer = wallet.provider.getSigner();
         wallet.address = accounts[0];
 
-        // Force Sepolia network
+        // Force Soneium Minato network
         const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-        if (chainId !== '0xaa36a7') {
+        if (chainId !== '0x79a') {
             try {
                 await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: '0xaa36a7' }],
+                    params: [{ chainId: '0x79a' }],
                 });
-                logToConsole("Red cambiada automáticamente a Sepolia.", "info");
+                logToConsole("Red cambiada automáticamente a Soneium Minato.", "info");
             } catch (err) {
-                logToConsole("Por favor, cambia manualmente a la red Sepolia en tu MetaMask.", "warning");
+                logToConsole("Por favor, cambia manualmente a la red Soneium Minato en tu MetaMask.", "warning");
             }
         }
 

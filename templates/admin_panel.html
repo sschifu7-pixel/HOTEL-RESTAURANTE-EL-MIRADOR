@@ -59,7 +59,8 @@
             <div class="form-group">
                 <label for="contract-address">Dirección del Smart Contract</label>
                 <div class="input-button-group">
-                    <input type="text" id="contract-address" class="input-field font-mono" placeholder="0x..." value="0x5FbDB2315678afecb367f032d93F642f64180aa3">
+                    <input type="text" id="contract-address" class="input-field font-mono"
+                        placeholder="Pega tu dirección de Sepolia (Ej. 0x...)" value="">
                     <button id="btn-load" class="btn btn-secondary">
                         <i class="fa-solid fa-spinner"></i> Cargar
                     </button>
@@ -322,18 +323,18 @@
             if (accounts.length > 0) {
                 adminWallet.signer = adminWallet.provider.getSigner();
                 adminWallet.address = accounts[0];
-                
-                // Force Sepolia network
+
+                // Force Soneium Minato network
                 const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-                if (chainId !== '0xaa36a7') {
+                if (chainId !== '0x79a') {
                     try {
                         await window.ethereum.request({
                             method: 'wallet_switchEthereumChain',
-                            params: [{ chainId: '0xaa36a7' }],
+                            params: [{ chainId: '0x79a' }],
                         });
-                        if (typeof logAdminConsole === 'function') logAdminConsole("Red cambiada automáticamente a Sepolia.", "info");
+                        if (typeof logAdminConsole === 'function') logAdminConsole("Red cambiada automáticamente a Soneium Minato.", "info");
                     } catch (err) {
-                        if (typeof logAdminConsole === 'function') logAdminConsole("Por favor, cambia manualmente a la red Sepolia en tu MetaMask.", "warning");
+                        if (typeof logAdminConsole === 'function') logAdminConsole("Por favor, cambia manualmente a la red Soneium Minato en tu MetaMask.", "warning");
                     }
                 }
 
@@ -432,7 +433,7 @@
                         const contract = new ethers.Contract(t.contract_address, ADMIN_CONTRACT_ABI, adminWallet.provider);
                         const depVal = await contract.totalDeposit();
                         const depEth = parseFloat(ethers.utils.formatEther(depVal));
-                        
+
                         // Auto-healing logic
                         let realStage = 0;
                         for (let i = 1; i <= 6; i++) {
